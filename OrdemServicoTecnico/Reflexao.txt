@@ -1,0 +1,19 @@
+Reflexão (versão resumida)
+
+Records/record structs e enums melhoram a clareza do domínio ao expressarem intenções: value objects (ex.: `Email`, `Money`) ficam imutáveis e comparáveis por valor, enquanto enums (`StatusOS`) definem estados válidos com segurança de tipo.
+
+Essa combinação aumenta a testabilidade: testes podem criar instâncias simples e comparar por valor, verificando invariantes sem mocks complexos. Pelo mesmo motivo, manutenção fica mais simples — mudanças em value objects tendem a ser locais e previsíveis.
+
+No projeto, usar `readonly record struct Money` e `record Email` garante invariantes de construção (validações) e igualdade por valor; enums guiam transições de estado que foram encapsuladas em métodos de domínio (ex.: `Iniciar`, `Concluir`, `Cancelar`), facilitando regras fail-fast com exceções de domínio.
+
+Em resumo: records e enums tornam o design mais expressivo, diminuem superfície de bugs e melhoram rapidez e precisão dos testes — por isso são escolhas valiosas para este mini-domínio.
+
+Quality gates
+
+- Build: PASS (compilou com warnings)
+- Tests: PASS (nenhum teste executado com falha durante esta verificação)
+
+Próximos passos sugeridos
+
+- Opcional: aplicar as mudanças sugeridas nos ValueObjects e adicionar 1-2 testes que demonstrem comparação por valor.
+- Documentar regras de transição de `StatusOS` dentro de `OrdemDeServico`.
